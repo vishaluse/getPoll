@@ -1,0 +1,32 @@
+{% extends 'poll/base.html' %}
+
+
+{% load static %}
+
+{% block title %}
+result
+{% endblock title %}
+
+
+{% block content %}
+<h3 class="h3">Hey I am Poll-Page</h3>
+<a href="{% url 'home' %}" class="btn btn-danger">go back</a>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <h1>{{polls.question}}</h1>
+        {% for poll in hello %}
+        <p>{{poll.text}} &nbsp;&nbsp; {{poll.count}}</p>
+        {% endfor %}
+
+    </div>
+    <div class="col text-right" id="timer-box"></div>
+</div>
+
+
+
+
+
+{% endblock content %}
