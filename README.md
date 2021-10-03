@@ -2,7 +2,7 @@
 
 make a virtual env using CMD
 
-open cmd : type 'pip install virtualenv'
+open cmd : type 'pip install virtualenvwrapper-win'
 
 to make env , type 'mkvirtualenv env_name'
 
