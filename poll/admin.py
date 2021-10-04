@@ -1,4 +1,4 @@
-from poll.models import Option, Poll
+from poll.models import Option, Poll, ImageOption
 from django.contrib import admin
 
 
@@ -6,8 +6,11 @@ from django.contrib import admin
 class OptionInline(admin.TabularInline):
     model = Option
 
+class ImageOptionInline(admin.TabularInline):
+    model = ImageOption
+
 class PollAdmin(admin.ModelAdmin):
-    inlines = [OptionInline]
+    inlines = [OptionInline, ImageOptionInline]
 
 admin.site.register(Poll, PollAdmin)
 admin.site.register(Option)

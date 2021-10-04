@@ -17,8 +17,11 @@ result
     <div class="col">
 
         <h1>{{polls.question}}</h1>
-        {% for poll in hello %}
+        {% for poll in option %}
         <p>{{poll.text}} &nbsp;&nbsp; {{poll.count}}</p>
+        {% endfor %}
+        {% for poll in image %}
+        <p><img src='{{poll.image.url}}'> &nbsp;&nbsp; {{poll.count}}</p>
         {% endfor %}
 
     </div>

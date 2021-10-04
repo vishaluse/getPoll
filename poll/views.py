@@ -14,7 +14,8 @@ class PollListView(ListView):
 def singlePollDetail(request, pk):
     poll = Poll.objects.get(pk=pk)
     print(poll)
-    return render(request, 'poll/poll_page.html', {'poll': poll})
+    image = poll.get_image()
+    return render(request, 'poll/poll_page.html', {'poll': poll, 'image': image})
 
 def poll_data_view(request,pk):
     poll = Poll.objects.get(pk=pk)
@@ -24,6 +25,7 @@ def poll_data_view(request,pk):
         ans.append(i.text)
     
     context = {str(poll.question): ans}
+
     #after a minute pass the time as time--
     return JsonResponse({
         'data': context,
@@ -31,13 +33,20 @@ def poll_data_view(request,pk):
     })
 
 
+
+
 def save_poll_data(request, pk):
     if request.is_ajax():
         data = request.POST
+        print(data)
         poll = Poll.objects.get(pk=pk)
         
         for i in poll.get_option():
             if i.text == data[poll.question]:
+                i.count += 1
+                i.save()
+        for i in poll.get_image():
+            if str(i.image) == str(data[poll.question]):
                 i.count += 1
                 i.save()
         # i need the all the option here which is associated with this question and
@@ -50,16 +59,18 @@ def option_count_data(request,pk):
     #using pk we will get the the question then we will see their count;
     poll = Poll.objects.get(pk=pk)
 
-   
-
-    options = {}
-
-    hello = poll.get_option()
+    option = poll.get_option()
+    image = poll.get_image()
        
-
-    context = {'polls': poll, 'hello': hello}
+    context = {'polls': poll, 'option': option, 'image': image}
     
-
     return render(request, 'poll/result.html', context)
 
 
+# we will see a instruction about when this poll is going to be closed
+# after certain time, we can manually do is_active of object as false 
+# this will give us the result, as the poll is closed , it will be
+# mention on that specific url.
+
+# I need a dynamic timer which can show the up to date time
+# then we can perform above operations
