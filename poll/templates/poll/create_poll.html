@@ -1,0 +1,73 @@
+{% extends 'poll/base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+create
+{% endblock title %}
+
+{% block scripts %}
+    <script src="{% static '/poll/create.js' %}" defer></script> 
+{% endblock scripts %}
+
+
+{% block content %}
+
+
+
+<div class="container">
+    <div class="text-center">
+        <h2>Create Poll</h2>
+    </div>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group col-md-6 ">
+        <label> Question </label>
+        <input type="text" required class="form-control"  name="question" placeholder="enter question ">
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="form-group col-md-5">
+            <label >Option</label>
+            <input type="text" required class="form-control"  name="options" placeholder="enter text">
+        </div>
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="form-group col-md-5">
+            <label >Option</label>
+            <input type="text" required class="form-control"  name="options" placeholder="enter text">
+        </div>
+
+        <div class="form-group col-md-3 ">
+            <button type="button" onclick="addOption()" class="btn btn-success mt-4" >Add options</button>
+        </div>
+    </div>
+
+    <div class="row" id="add-option"></div>
+
+    <br>
+    
+    <div class="form-group col-md-3">
+        <label >Add Timer</label>
+        <input type="text" required class="form-control" name="timer" placeholder="enter time(minutes)">
+    </div>
+
+    <br>
+
+    &nbsp;<button class="btn btn-primary" >Submit</button>
+</form>
+
+
+   
+
+
+
+
+{% endblock %}

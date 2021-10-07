@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.http.response import HttpResponse
 from django.views.generic import ListView
 from django.shortcuts import render
 import json
@@ -13,7 +14,6 @@ class PollListView(ListView):
 
 def singlePollDetail(request, pk):
     poll = Poll.objects.get(pk=pk)
-    print(poll)
     image = poll.get_image()
     return render(request, 'poll/poll_page.html', {'poll': poll, 'image': image})
 
@@ -67,10 +67,14 @@ def option_count_data(request,pk):
     return render(request, 'poll/result.html', context)
 
 
-# we will see a instruction about when this poll is going to be closed
-# after certain time, we can manually do is_active of object as false 
-# this will give us the result, as the poll is closed , it will be
-# mention on that specific url.
+def create_poll(request):
+    if request.method == "POST":
+        question = request.POST.get('question')
+        options  = request.POST.getlist('options')
+        time = request.POST.get('timer')
+        poll = Poll.objects.create(question=question, no_of_option=len(options), time=time, user=request.user)
+        for option in options:
+            Option.objects.create(text=option, poll=poll)
 
-# I need a dynamic timer which can show the up to date time
-# then we can perform above operations
+    return render(request, 'poll/create_poll.html')
+        
