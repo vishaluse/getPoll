@@ -55,14 +55,22 @@ def save_poll_data(request, pk):
         
     return JsonResponse({'data': 'this is save poll data' })
 
-def option_count_data(request,pk):
+def result_data(request,pk):
     #using pk we will get the the question then we will see their count;
     poll = Poll.objects.get(pk=pk)
 
     option = poll.get_option()
+
+    total = 0
+    for op in option:
+        total += op.count
+
     image = poll.get_image()
        
-    context = {'polls': poll, 'option': option, 'image': image}
+    context = {'polls': poll, 
+               'option': option, 
+               'image': image, 
+               'total': total}
     
     return render(request, 'poll/result.html', context)
 
@@ -77,4 +85,12 @@ def create_poll(request):
             Option.objects.create(text=option, poll=poll)
 
     return render(request, 'poll/create_poll.html')
-        
+    
+def result_json(request, pk):
+    poll = Poll.objects.get(pk=pk)
+    option = poll.get_option()
+    option_data = []
+    for op in option:
+        option_data.append({op.text: op.count})
+    
+    return JsonResponse(option_data, safe=False)

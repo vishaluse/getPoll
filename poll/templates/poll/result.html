@@ -1,35 +1,100 @@
-{% extends 'poll/base.html' %}
+{% extends "poll/base.html" %}
 
-
-{% load static %}
-
-{% block title %}
-result
-{% endblock title %}
-
+{% block title %}Results{% endblock %}
 
 {% block content %}
-<h3 class="h3">Hey I am Poll-Page</h3>
-<a href="{% url 'home' %}" class="btn btn-danger">go back</a>
-<hr>
-
 <div class="row">
-    <div class="col">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Poll Result</h3>
+            </div>
+            <hr>
+            <br>
 
-        <h1>{{polls.question}}</h1>
-        {% for poll in option %}
-        <p>{{poll.text}} &nbsp;&nbsp; {{poll.count}}</p>
-        {% endfor %}
-        {% for poll in image %}
-        <p><img src='{{poll.image.url}}'> &nbsp;&nbsp; {{poll.count}}</p>
-        {% endfor %}
+            <div class="panel-body">
+                <h3>{{ polls.question }}</h3>
+            </div>
 
+            
+            <ul class="list-group">
+                {% for poll in option %}
+
+				
+
+                <li class="list-group-item">{{ poll.text }} <span class="pull-right">
+                    <div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: {{poll.count}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					  </div>
+                </span></li>
+                {% endfor %}
+            </ul>
+
+            <div class="panel-footer" align=center>
+                Total &mdash; <strong>{{ total }}</strong>
+            </div>
+
+        </div>
     </div>
-    <div class="col text-right" id="timer-box"></div>
 </div>
 
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<div id="myChart"></div>
+
+<script>
+
+    var state ={	
+		'items':[],
+		'values':[],
+	}
+
+	var objId = "{{polls.id}}"
+
+	var dataURL = `/${objId}/result-json/`
+	$.ajax({
+		method:'GET',
+		url:dataURL,
+		success:function(response){
+			console.log('RESPONSE:', response)
+			for (var i in response){
+
+				var key = Object.keys(response[i])[0]
+				var value = Object.values(response[i])[0]
+
+				state.items.push(key)
+				state.values.push(value)
+			}
+
+			console.log('STATE:', state)
+			buildChart()
+
+		}
+	})
+
+	function buildChart(){
+			var chartData = {
+			"type":"bar",
+			"scale-x":{
+				"values":state.items
+			},
+			"series":[
+				{
+					"values":state.values
+				}
+			]
+		}
 
 
+		zingchart.render({
+		  id: "myChart",
+		  data: chartData,
+		});
+	}
+
+</script> 
 
 
-{% endblock content %}
+{% endblock %}
+

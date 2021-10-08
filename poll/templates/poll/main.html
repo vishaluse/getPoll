@@ -12,7 +12,7 @@ home
 {% block content %}
 
 <!-- Modal -->
-<div class="h1">Poll List</div>
+<div class="h1">Live Polls</div>
 <div class="modal fade" id="pollStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -34,6 +34,11 @@ home
 
 <hr>
 {% for obj in object_list %}
+
+
+
+
+
     <button
         class="btn btn-link modal-button"
         data-pk="{{obj.pk}}"
@@ -42,7 +47,8 @@ home
         data-time="{{obj.time}}"
         data-bs-toggle="modal"
         data-bs-target="#pollStartModal">
-        {{obj.question}}
+        {{obj.question }}
+
     </button><br>
 
 {% endfor %}

@@ -15,18 +15,21 @@ poll page
 {% block content %}
 
 
-<h3 class="h3">Hey I am Poll-Page</h3>
-<div class="row">
+
+&nbsp;<a href="{% url 'home' %}" class="btn btn-danger"> go back</a>
+<div class="row container-fluid">
+    <h3 class="h3">Vote Here</h3>
+    
+
     <div class="col">
-        <p>no_of_option: {{poll.no_of_option}}</p>
-        <p>creator:&nbsp; {{poll.user}}</p>
+        <p class="h5">no of option: {{poll.no_of_option}}</p>
+        <p class="h5">creator:&nbsp; {{poll.user}}</p>
     </div>
     <div class="col text-right" id="timer-box">countdown </div>
-    <div class="col text-right" >countdown: &nbsp;{{poll.time}}</div>
+   
 
    
 </div>
-&nbsp;<a href="{% url 'home' %}" class="btn btn-danger"> go back</a>
 
 
 

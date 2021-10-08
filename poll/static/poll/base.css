@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Varela+Round&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Varela Round', sans-serif;
+    position: relative;
+}
+
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+    padding: 40px 30px;
+    box-sizing: border-box;
+    width: 100%;
+    position: sticky;
+    top:0;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    
+}
+.logo{
+    font-size: 38px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: #3cbe6d;
+    cursor: pointer;
+    text-decoration: none;
+    transition : all 0.2s ease;
+    
+}
+
+.logo:hover{
+    color: #27da6b;
+}
+.nav-links-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+    
+
+}
+.nav-links{
+    font-size: 17px;
+    color: #444444;
+    margin: 0px 30px;
+    cursor: pointer;
+    text-decoration: none;
+    font-style: none;
+    transition: all 0.3s ease;
+    /* border: 1px solid black; */
+}
+.nav-links-3{
+    color: #3cbe6d;
+    font-weight: bold;
+}
+
+.nav-links:hover{
+    opacity: 0.8;
+}
+
+
+
+.right{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 220px;
+}
+.sign{
+    font-size: 17px;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.in{
+    color: #357dd0;
+    transition: all 0.3s ease; 
+}
+.in:hover{
+    color: white;
+    background-color: #357dd0;
+}
+.up{
+    color: white;
+    background-color: #357dd0;
+}
+.up:hover{
+    transform: scale(1.02);
+}
+.upper-content{
+    color: #132C33;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    line-height: 60px;
+    background: url('images/content-background.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    /* border: 1px solid black; */
+}
+
+
+.upper-content a{
+    color: #3cbe6d;
+    text-decoration: none;
+}
+.upper-content a:hover{
+    opacity: 0.9;
+    text-decoration: underline;
+}
+
+.middle-content{
+    /* border: 1px solid black; */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #FFB344;
+    font-size: 48px;
+    font-weight: bold;
+    padding: 40px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    border-spacing: 1px;
+}
+.middle-content span{
+    color: #132C33;
+}
+.p2{
+    color: grey;
+    font-size: 18px;
+    font-weight: normal;
+    position: relative;
+    top: -25px;
+}
+.fa-poll{
+    font-size: 300px;
+    margin-right: 100px;
+    transform: rotate3d(45deg);
+    text-shadow: 0 0 10px #132C33;
+}
+
+footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    background-color: #D8E3E7;
+    
+}
+.footer-left{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.social-links-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+    font-size: 20px;
+    /* border: 1px solid black; */
+    cursor: pointer;
+}
+.fa-facebook-f{
+    color: #4064ac;
+}
+.fa-instagram{
+    color: #D03D99;
+}
+.fa-twitter{
+    color: #1DA1F2;
+}
+.footer-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style-type: none;
+    height: 150px;
+}
+.fa-heart{
+    color: #E05D5D;
+}
+.fab:hover{
+    transform: scale(1.05);
+}

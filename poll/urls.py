@@ -6,7 +6,8 @@ urlpatterns = [
     path('<int:pk>', views.singlePollDetail, name='poll-detail'),
     path('<int:pk>/data', views.poll_data_view, name='poll-data-view'),
     path('<int:pk>/save', views.save_poll_data, name='save-poll-view'),
-    path('<int:pk>/result', views.option_count_data, name='option-count-data'),
+    path('<int:pk>/result', views.result_data, name='result-data'),
+    path('<int:pk>/result-json/', views.result_json, name='result-data-json'),
     path('create/', views.create_poll, name='create')
 
 
