@@ -25,7 +25,6 @@ def poll_data_view(request,pk):
         ans.append(i.text)
     
     context = {str(poll.question): ans}
-
     #after a minute pass the time as time--
     return JsonResponse({
         'data': context,
@@ -94,3 +93,7 @@ def result_json(request, pk):
         option_data.append({op.text: op.count})
     
     return JsonResponse(option_data, safe=False)
+
+
+def loginGoogle(request):
+    return render(request, 'poll/login.html')

@@ -3,6 +3,7 @@
 
 {% block scripts %}
     <script src="{% static '/poll/main.js' %}" defer></script> 
+
 {% endblock scripts %}
 
 {% block title %}
@@ -36,9 +37,6 @@ home
 {% for obj in object_list %}
 
 
-
-
-
     <button
         class="btn btn-link modal-button"
         data-pk="{{obj.pk}}"
@@ -48,10 +46,10 @@ home
         data-bs-toggle="modal"
         data-bs-target="#pollStartModal">
         {{obj.question }}
-
     </button><br>
-
 {% endfor %}
+
+
 
 
 
