@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}GetPoll{% endblock %}</title>
     
-    <link rel="stylesheet" href="{% static 'poll/base.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     {% block css %}
     {% endblock %}
@@ -16,51 +15,23 @@
     {% endblock scripts %}
 </head>
 <body>
-   {% block header%}
+ 
     <header class="nav-bar">
-        <a class="logo" href="{% url 'home' %}"><em>GET POLL</em></a>
         <ul class="nav-links-wrapper">
-            <a href="" class="nav-links nav-links-1">About</a>
-            <a href="" class="nav-links nav-links-2">Report Bug</a>
+            <a class="logo" href="{% url 'home' %}"><em>GET POLL</em></a>
             <a href="{% url 'create' %}" class="nav-links nav-links-3">Create Poll</a>
         </ul>
-        <div class="right">
-            <a href="{% url 'login' %}" class="sign in">Login <i class="fas fa-sign-in-alt"></i></a>
-            <a href="/signup" class="sign up">SignUp <i class="fas fa-user"></i></a>
-        </div>
     </header>
-    {% endblock %}
+  
 
     
     
-    <main>
-        <section class="upper-content">
-            <p class="tagline"><a href="{% url 'create' %}">Create</a> Instant Polls <br> At Your Finger Clicks!</p>
-        </section>
+
         {% block content %}
         {% endblock %}
-        <section class="middle-content">
-            <p class="p1">Know you audience opinions,<br>in the <span>real time.</span><br>
-            <span class="p2">Designed to be pixel perfect and maximise interactions and results</span>
-            </p>
-            
-            <i class="fas fa-poll"></i>
-        </section>
-    </main>
+      
     
-    {% block footer %}
-    <footer>
-        <div class="footer-left">
-            <b>Follow Us :</b>
-            <ul class="social-links-wrapper">
-                <i class="fab fa-facebook-f"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-twitter"></i>
-            </ul>
-        </div>
-        <p class="creators">Made with <i class="fas fa-heart"></i> by Vishal | Yogesh | Ajit</p>
-    </footer>
-    {% endblock %}
+    
 
     
 
