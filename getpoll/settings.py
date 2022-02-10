@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path,os
 from tkinter.tix import Tree
+from .sec import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y=-9kdob2))6bxanwsrk73%tm04&m3!c4@of16dy6yfuvtvp*s'
+SECRET_KEY = sECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -170,12 +171,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #sending mails for confirmation  or changing password
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'vishwakarmavishal1999@gmail.com'
-EMAIL_HOST_PASSWORD = '11091999'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+EMAIL_HOST = eMAIL_HOST
+EMAIL_USE_TLS = eMAIL_USE_TLS
+EMAIL_PORT = eMAIL_PORT
+EMAIL_HOST_USER = eMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = eMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = dEFAULT_FROM_EMAIL
 
 
 
