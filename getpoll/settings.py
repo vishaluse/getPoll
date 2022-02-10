@@ -172,7 +172,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #sending mails for confirmation  or changing password
 
-
+#sdfs
 EMAIL_HOST = eMAIL_HOST
 EMAIL_USE_TLS = eMAIL_USE_TLS
 EMAIL_PORT = eMAIL_PORT
