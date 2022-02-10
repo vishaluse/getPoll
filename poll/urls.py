@@ -11,7 +11,6 @@ urlpatterns = [
     path('create/', views.create_poll, name='create'),
 
 
-    path('login/', views.loginGoogle, name='login')
 
 
   

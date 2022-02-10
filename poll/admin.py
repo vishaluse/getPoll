@@ -1,4 +1,4 @@
-from poll.models import Option, Poll, ImageOption
+from poll.models import Option, Poll, ImageOption, PollHistory
 from django.contrib import admin
 
 
@@ -14,3 +14,4 @@ class PollAdmin(admin.ModelAdmin):
 
 admin.site.register(Poll, PollAdmin)
 admin.site.register(Option)
+admin.site.register(PollHistory)
