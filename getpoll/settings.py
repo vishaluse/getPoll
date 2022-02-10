@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path,os
+from tkinter.tix import Tree
+from .sec import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y=-9kdob2))6bxanwsrk73%tm04&m3!c4@of16dy6yfuvtvp*s'
+SECRET_KEY = sECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -40,7 +42,38 @@ INSTALLED_APPS = [
     'poll',
     'result',
 
+   
+
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_UNIQUE = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+
+# if DEBUG:    
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,7 +91,7 @@ ROOT_URLCONF = 'getpoll.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,4 +170,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#ajit yadav 
+#sending mails for confirmation  or changing password
+
+
+EMAIL_HOST = eMAIL_HOST
+EMAIL_USE_TLS = eMAIL_USE_TLS
+EMAIL_PORT = eMAIL_PORT
+EMAIL_HOST_USER = eMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = eMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = dEFAULT_FROM_EMAIL
+
+
+

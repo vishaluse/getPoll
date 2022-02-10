@@ -1,6 +1,7 @@
 console.log("hehe boi")
 
 const optionBox = document.getElementById('option-box')
+const helloBox = document.getElementById('hello')
 const scoreBox = document.getElementById('score-box')
 const resultBox = document.getElementById('result-box')
 const timerBox = document.getElementById('timer-box')
@@ -58,23 +59,30 @@ $.ajax({
     success: function(response){
         console.log(response)
         const data = response.data
-        for (const [key, value] of Object.entries(data)) {
-            optionBox.innerHTML += `
-                    <hr>
-                    <div  class="mb-2">
-                        <b>${key}</b>
-                    </div>
-                `
-                value.forEach(v=>{
-                    optionBox.innerHTML += `
-                        <div>
-                            <input type="radio" class="ans" id="${key}-${v}" name="${key}" value="${v}">
-                            <label for="${key}">${v}</label>
+        console.log("I am a gap")
+        console.log(response.is_voted)
+        if(response.is_voted) {
+            helloBox.innerHTML += `<h3>You have already voted Chims </h3>`            
+        } else {
+            for (const [key, value] of Object.entries(data)) {
+                optionBox.innerHTML += `
+                        <hr>
+                        <div  class="mb-2">
+                            <b>${key}</b>
                         </div>
                     `
-                })
-          }
-          activateTimer(response.time)
+                    value.forEach(v=>{
+                        optionBox.innerHTML += `
+                            <div>
+                                <input type="radio" class="ans" id="${key}-${v}" name="${key}" value="${v}">
+                                <label for="${key}">${v}</label>
+                            </div>
+                        `
+                    })
+              }
+              activateTimer(response.time)
+        }
+        
     },
     error: function(error){
         console.log(error)
