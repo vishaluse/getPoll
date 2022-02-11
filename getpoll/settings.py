@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path,os
-from tkinter.tix import Tree
 from .sec import *
 import django_heroku
 
