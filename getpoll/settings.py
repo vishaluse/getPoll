@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path,os
+from pathlib import Path
 from .sec import *
 import django_heroku
+import os
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -159,12 +161,16 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+
 
 
 STATICFILES_DIRS = [
      os.path.join(BASE_DIR, 'static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
