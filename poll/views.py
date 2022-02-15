@@ -33,7 +33,7 @@ def poll_data_view(request,pk):
     for i in poll.get_option():
         ans.append(i.text)
     
-    print(flag)
+   
     context = {str(poll.question): ans}
     #after a minute pass the time as time--
     return JsonResponse({
@@ -51,7 +51,7 @@ def save_poll_data(request, pk):
         poll = Poll.objects.get(pk=pk)
        
         poll_history = PollHistory.objects.get(user=request.user, poll=poll)
-        print(poll_history)
+       
         # create a poll_history only if it does not exit which will contain the current user and the poll he/she is voting for
         # and check if he/she has voted then don't let them vote again 
         # else let them vote
