@@ -6,5 +6,5 @@ eMAIL_HOST = 'smtp.gmail.com'
 eMAIL_USE_TLS = True
 eMAIL_PORT = 587
 eMAIL_HOST_USER = 'vishwakarmavishal1999@gmail.com'
-eMAIL_HOST_PASSWORD = '11091999'
+eMAIL_HOST_PASSWORD = 'vishal11091999'
 dEFAULT_FROM_EMAIL = eMAIL_HOST_USER
