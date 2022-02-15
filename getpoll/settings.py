@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from .sec import *
-# import django_heroku
+import django_heroku
 import os
 
 
@@ -189,6 +189,6 @@ EMAIL_HOST_USER = eMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = eMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = dEFAULT_FROM_EMAIL
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
 
 
