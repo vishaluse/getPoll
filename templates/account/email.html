@@ -31,9 +31,9 @@
   {% endfor %}
 
 <div class="buttonHolder">
-      <button class="secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+      <button class="secondaryAction ui button " type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+      <button class="secondaryAction ui button" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+      <button class="primaryAction ui button secondary" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
 </div>
 
 </fieldset>
@@ -46,12 +46,17 @@
 
   {% if can_add_email %}
     <h2>{% trans "Add E-mail Address" %}</h2>
-
-    <form method="post" action="{% url 'account_email' %}" class="add_email">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Add E-mail" %}</button>
-    </form>
+    <div class="ui grid">
+      <div class="ten wide column">
+        <form method="post" action="{% url 'account_email' %}" class="add_email ui form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button name="action_add" type="submit" class="btn btn-success">{% trans "Add E-mail" %}</button>
+        </form>
+      </div>
+    </div>
+    
+    
   {% endif %}
 
 {% endblock %}

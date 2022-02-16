@@ -34,7 +34,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% endif %}
 
 <div class="ui grid">
-  <div class="six wide column">
+  <div class="ten wide column">
     <form class="login ui form" method="POST" action="{% url 'account_login' %}">
       {% csrf_token %}
       {{ form.as_p }}
