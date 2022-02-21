@@ -1,11 +1,15 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.http.response import HttpResponse
 from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import json
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+
 from poll.models import Poll, Option, PollHistory
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages #import messages
+
 
 class PollListView(ListView):
     model = Poll
@@ -15,7 +19,20 @@ class PollListView(ListView):
 def singlePollDetail(request, pk):
     poll = Poll.objects.get(pk=pk)
     image = poll.get_image()
-    return render(request, 'poll/poll_page.html', {'poll': poll, 'image': image})
+    visitor = False
+    if request.user.is_authenticated: 
+        try:
+            poll_history = PollHistory.objects.get(user=request.user, poll=poll)
+        except PollHistory.DoesNotExist:
+            poll_history = PollHistory.objects.create(user=request.user, poll=poll)
+    else :
+        visitor = True
+        poll_history = False
+    
+    context = {'poll': poll, 'image': image, 'poll_history': poll_history, 'visitor': visitor}
+    return render(request, 'poll/poll_page.html', context)
+
+
 
 def poll_data_view(request,pk):
     poll = Poll.objects.get(pk=pk)
@@ -67,7 +84,9 @@ def save_poll_data(request, pk):
                     i.save()
             poll_history.is_voted = True
             poll_history.save()
+            messages.warning(request, 'You just voted')
             return JsonResponse({'data': 'your vot got saved, congrats' })
+            
         else :
             return JsonResponse({'data': 'You have already voted'})
     else:
@@ -97,7 +116,13 @@ def result_data(request,pk):
     
     return render(request, 'poll/result.html', context)
 
+def check_create_poll(request):
+    if request.user.is_anonymous:
+        messages.warning(request, 'You must log in to create polls.')
+    return create_poll(request)
 
+
+@login_required()
 def create_poll(request):
     if request.method == "POST":
         question = request.POST.get('question')
@@ -120,3 +145,9 @@ def result_json(request, pk):
     return JsonResponse(option_data, safe=False)
 
 
+def profile_dashboard(request):
+    context = {}
+    return render(request, 'poll/profile_dashboard.html', context)
+
+def profile_info(request):
+    return render(request, 'account/profile_info.html');

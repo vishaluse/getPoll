@@ -62,7 +62,13 @@ $.ajax({
         console.log("I am a gap")
         console.log(response.is_voted)
         if(response.is_voted) {
-            helloBox.innerHTML += `<h3>You have already voted Chims </h3>`            
+            helloBox.innerHTML += `<div class="ui negative message">
+                                   
+                                    <div class="header">
+                                    You have already voted
+                                    </div>
+                                    <p>try other polls or create a new one.
+                                </p></div>`            
         } else {
             for (const [key, value] of Object.entries(data)) {
                 optionBox.innerHTML += `
@@ -117,6 +123,8 @@ const sendData = () => {
         url: `${url}/save`,
         data: data,
         success: function(response){
+            window.location.href = "http://127.0.0.1:8000";
+
             console.log(response)
         },
         error: function(error){

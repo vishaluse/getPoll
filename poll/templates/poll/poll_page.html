@@ -17,13 +17,12 @@ poll page
 
 
 
-&nbsp;<a href="{% url 'home' %}" class="btn btn-danger"> go back</a>
+&nbsp;<a href="{% url 'home' %}" class="ui primary button"> go back</a>
 <div class="row container-fluid">
-    <h3 class="h3">Vote Here</h3>
     
 
     <div class="col">
-        <p class="h5">no of option: {{poll.no_of_option}}</p>
+        
         <p class="h5">creator:&nbsp; {{poll.user}}</p>
     </div>
     <div class="col text-right" id="timer-box">countdown </div>
@@ -50,8 +49,10 @@ poll page
         </div> 
     </div>
 
-
+    {% if visitor or poll_history.is_voted is False%}
     &nbsp;<button type="submit" class="btn btn-primary mt-3"> save</button>
+  
+    {% endif %}
 </form>
 <div id="score-box"></div>
 <div id="result-box"></div>
