@@ -1,7 +1,9 @@
 var current_option = 0
 
 const addImageNow = document.getElementById('image-body')
-addImageNow.addEventListener('click', addImage, false);
+if(addImageNow) {
+    addImageNow.addEventListener('click', addImage, false);
+}
 
 function addImage() {
     var element = document.getElementById('add-option')

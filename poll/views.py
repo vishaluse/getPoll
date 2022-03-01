@@ -186,13 +186,13 @@ def create_poll(request):
 # dashboard for current user to manipulates his/her created polls
 @login_required
 def userPoll(request):
-    polls = Poll.objects.all()
-    userPolls = []
-    for poll in polls:
-        if poll.user == request.user:
-            userPolls.append(poll)
+    polls = Poll.objects.filter(user=request.user).order_by('-created')
+    # userPolls = []
+    # for poll in polls:
+    #     if poll.user == request.user:
+    #         userPolls.append(poll.order)
 
-    context = {'polls' :userPolls}
+    context = {'polls' :polls}
     return render(request, 'poll/poll_dashboard.html', context)
 
 # class PollDetailView(DetailView):
