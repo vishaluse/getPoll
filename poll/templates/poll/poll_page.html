@@ -38,18 +38,19 @@ poll page
     
     <div id="option-box"></div>
 
+    {% if visitor or poll_history.is_voted is False%}
     <div class="form-group">
         <div class="radio">
             {% for img in image %}
-            <div>
-                <input type="radio" class="ans" id="{{poll.question}}-{{img.image}}" name="{{poll.question}}" value="{{img.image}}"><img src="{{img.image.url}}">
+            <div class="ui form">
+                <input type="radio" class="ans" id="{{poll.question}}-{{img.image}}" name="{{poll.question}}" value="{{img.image}}"><img style="height: 200px; width: 200px" src="{{img.image.url}}">
                 <label for="{{poll.question}}"></label>
             </div>
             {% endfor %}
         </div> 
     </div>
 
-    {% if visitor or poll_history.is_voted is False%}
+    
     &nbsp;<button type="submit" class="btn btn-primary mt-3"> save</button>
   
     {% endif %}

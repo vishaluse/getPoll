@@ -1,4 +1,5 @@
 {% extends "poll/base.html" %}
+{% load mathfilters %}
 
 {% block title %}Results{% endblock %}
 
@@ -19,12 +20,16 @@
             
             <ul class="list-group">
                 {% for poll in option %}
-
-				
-
                 <li class="list-group-item">{{ poll.text }} <span class="pull-right">
                     <div class="progress">
 						<div class="progress-bar" role="progressbar" style="width: {{poll.count}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					  </div>
+                </span></li>
+                {% endfor %}
+				{% for img in image %}
+                <li class="list-group-item" id="no-of-image">Option {{img.id|sub:image.0.id|add:1}}<span class="pull-right">
+                    <div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: {{img.count}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 					  </div>
                 </span></li>
                 {% endfor %}
@@ -44,6 +49,7 @@
 <div id="myChart"></div>
 
 <script>
+	
 
     var state ={	
 		'items':[],
@@ -62,8 +68,12 @@
 
 				var key = Object.keys(response[i])[0]
 				var value = Object.values(response[i])[0]
+				if(key.substr(0,7).localeCompare("images/") == 0) {
+					state.items.push(key.slice(18))
+				} else {
+					state.items.push(key)
+				}
 
-				state.items.push(key)
 				state.values.push(value)
 			}
 

@@ -46,7 +46,12 @@ home
         data-bs-toggle="modal"
         data-bs-target="#pollStartModal">
         {{obj.question }}
-    </button><br>
+    </button>
+    {% if obj.user == user %}
+    <a href="{% url 'result' obj.id%}">(result)</a>
+    {% endif %}
+    
+    <br>
 {% endfor %}
 
 

@@ -63,7 +63,6 @@ $.ajax({
         console.log(response.is_voted)
         if(response.is_voted) {
             helloBox.innerHTML += `<div class="ui negative message">
-                                   
                                     <div class="header">
                                     You have already voted
                                     </div>
@@ -123,7 +122,7 @@ const sendData = () => {
         url: `${url}/save`,
         data: data,
         success: function(response){
-            window.location.href = "http://127.0.0.1:8000";
+            window.location.href = url;
 
             console.log(response)
         },
