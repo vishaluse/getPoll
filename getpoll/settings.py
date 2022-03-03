@@ -14,7 +14,7 @@ from pathlib import Path
 from .sec import *
 import django_heroku
 import os
-import cloudinary_storage
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'poll',
     'result',
     'mathfilters',
@@ -165,6 +165,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 MEDIA_URL = '/images/'
 
 
@@ -176,6 +177,7 @@ STATICFILES_DIRS = [
      os.path.join(BASE_DIR, 'poll/static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
