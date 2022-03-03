@@ -13,7 +13,8 @@ from poll.models import ImageOption, Poll, Option, PollHistory
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages #import messages
 import itertools 
-from .forms import PhotoForm
+import datetime
+
 
 
 # it will pass all the poll object in the model , cause its a listView
@@ -230,6 +231,8 @@ def userPollDetail(request, pk):
 
         poll.question = question
         poll.time = time
+
+        poll.created = datetime.datetime.now()
         poll.save()
 
         image_img_list  = request.FILES.getlist('images')

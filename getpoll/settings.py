@@ -14,7 +14,7 @@ from pathlib import Path
 from .sec import *
 import django_heroku
 import os
-
+import cloudinary_storage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'poll',
     'result',
@@ -193,6 +194,13 @@ EMAIL_PORT = eMAIL_PORT
 EMAIL_HOST_USER = eMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = eMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = dEFAULT_FROM_EMAIL
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': getpoll_cloud_name,
+    'API_KEY': getpoll_api_key,
+    'API_SECRET': getpoll_api_secret
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 django_heroku.settings(locals(), staticfiles=False)
 
