@@ -47,9 +47,6 @@ INSTALLED_APPS = [
     'result',
     'mathfilters',
 
-   
-
-
     'django.contrib.sites',
     'allauth',
     'allauth.account',
