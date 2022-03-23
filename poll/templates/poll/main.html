@@ -1,0 +1,61 @@
+{% extends "poll/base.html" %}
+{% load static %}
+
+{% block scripts %}
+    <script src="{% static '/poll/main.js' %}" defer></script> 
+
+{% endblock scripts %}
+
+{% block title %}
+home
+{% endblock title %}
+
+{% block content %}
+
+<!-- Modal -->
+<div class="h1">Live Polls</div>
+<div class="modal fade" id="pollStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Poll</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >
+    
+        </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="start-button">Redirect</button>
+            </div>
+      </div>
+    </div>
+  </div>
+
+
+<hr>
+{% for obj in object_list %}
+
+
+    <button
+        class="btn btn-link modal-button"
+        data-pk="{{obj.pk}}"
+        data-question="{{obj.question}}"
+        data-option="{{obj.number_of_option}}"
+        data-time="{{obj.time}}"
+        data-bs-toggle="modal"
+        data-bs-target="#pollStartModal">
+        {{obj.question }}
+    </button>
+    {% if obj.user == user %}
+    <a href="{% url 'result' obj.id%}">(result)</a>
+    {% endif %}
+    
+    <br>
+{% endfor %}
+
+
+
+
+
+{% endblock content %}

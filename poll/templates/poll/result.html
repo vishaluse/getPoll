@@ -1,0 +1,110 @@
+{% extends "poll/base.html" %}
+{% load mathfilters %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Poll Result</h3>
+            </div>
+            <hr>
+            <br>
+
+            <div class="panel-body">
+                <h3>{{ polls.question }}</h3>
+            </div>
+
+            
+            <ul class="list-group">
+                {% for poll in option %}
+                <li class="list-group-item">{{ poll.text }} <span class="pull-right">
+                    <div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: {{poll.count}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					  </div>
+                </span></li>
+                {% endfor %}
+				{% for img in image %}
+                <li class="list-group-item" id="no-of-image">Option {{img.id|sub:image.0.id|add:1}}<span class="pull-right">
+                    <div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: {{img.count}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					  </div>
+                </span></li>
+                {% endfor %}
+            </ul>
+
+            <div class="panel-footer" align=center>
+                Total &mdash; <strong>{{ total }}</strong>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<div id="myChart"></div>
+
+<script>
+	
+
+    var state ={	
+		'items':[],
+		'values':[],
+	}
+
+	var objId = "{{polls.id}}"
+
+	var dataURL = `/${objId}/result-json/`
+	$.ajax({
+		method:'GET',
+		url:dataURL,
+		success:function(response){
+			console.log('RESPONSE:', response)
+			for (var i in response){
+
+				var key = Object.keys(response[i])[0]
+				var value = Object.values(response[i])[0]
+				if(key.substr(0,7).localeCompare("images/") == 0) {
+					state.items.push(key.slice(18))
+				} else {
+					state.items.push(key)
+				}
+
+				state.values.push(value)
+			}
+
+			console.log('STATE:', state)
+			buildChart()
+
+		}
+	})
+
+	function buildChart(){
+			var chartData = {
+			"type":"bar",
+			"scale-x":{
+				"values":state.items
+			},
+			"series":[
+				{
+					"values":state.values
+				}
+			]
+		}
+
+
+		zingchart.render({
+		  id: "myChart",
+		  data: chartData,
+		});
+	}
+
+</script> 
+
+
+{% endblock %}
+

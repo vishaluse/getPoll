@@ -1,0 +1,83 @@
+{% extends 'poll/base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+create
+{% endblock title %}
+
+{% block scripts %}
+    <script src="{% static '/poll/create.js' %}" defer></script> 
+{% endblock scripts %}
+
+
+{% block content %}
+
+
+
+<div class="container">
+    <div class="text-center">
+        <h2>Create Poll</h2>
+    </div>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="container">
+        <div class="form-group col-md-6 " >
+            <label> Question </label>
+            <input type="text" required class="form-control"  name="question" placeholder="enter question ">
+        </div>
+
+        <br>
+
+        <div class="form-group col-md-6 ">
+            <div class="class="col-xs-4 col-xs-offset-4">
+                <h4 class="ui horizontal divider header">
+                    <i class="tag icon"></i>
+                    Choose
+                </h4>
+                <p>choose the type of poll you want to create</p>
+                <a class="ui teal button" data-bs-toggle="collapse" id="first-one" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Text
+                </a>
+                <a class="ui teal button" data-bs-toggle="collapse" id="second-one" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Image
+                </a>
+            </div>
+                
+            <div id="collapseExample">
+                <div id="first-one-body">
+                </div>
+            </div>
+
+            <div id="collapseExample1">
+                <div id="second-one-body">
+
+                </div>
+            </div>
+        </div>
+
+        <br>
+    
+        <div class="form-group col-md-3">
+            <label >Add Timer</label>
+            <input type="text" required class="form-control" name="timer" placeholder="enter time(minutes)">
+        </div>
+
+        <br>
+
+    </div>
+
+    &nbsp;<button class="btn btn-primary" >Submit</button>
+</form>
+
+
+   
+
+
+
+
+{% endblock %}
