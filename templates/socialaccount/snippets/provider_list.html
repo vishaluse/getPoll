@@ -3,18 +3,21 @@
 {% get_providers as socialaccount_providers %}
 
 {% for provider in socialaccount_providers %}
-{% if provider.id == "openid" %}
-{% for brand in provider.get_brands %}
-<li>
-  <a title="{{brand.name}}" 
-     class="socialaccount_provider {{provider.id}} {{brand.id}}" 
-     href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
-     >{{brand.name}}</a>
-</li>
-{% endfor %}
-{% endif %}
-<li>
-  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" 
-     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{{provider.name}}</a>
-</li>
+
+
+  
+
+    <div class="login-wrapper">
+      <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btnn btn-google" 
+      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+      <img src="https://img.icons8.com/fluency/48/000000/google-logo.png" />
+          Log In with Google
+      </a>
+      <div class="line-breaker">
+        <span class="line"></span>
+        <span>or</span>
+        <span class="line"></span>
+      </div>
+    </div>
+
 {% endfor %}

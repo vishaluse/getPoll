@@ -1,4 +1,4 @@
-{% extends 'poll/base.html' %}
+{% extends 'poll/semantic.html' %}
 
 
 {% load static %}
@@ -8,7 +8,7 @@ poll page
 {% endblock title %}
 
 {% block scripts %}
-<script src="{% static 'poll/detail.js' %}" defer></script> 
+<script src="{% static 'poll/js/detail.js' %}" defer></script> 
 
 {% endblock scripts %}
 {% load social_share %}

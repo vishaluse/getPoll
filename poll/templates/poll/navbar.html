@@ -1,0 +1,27 @@
+
+
+<header class="nav-bar">
+  <a class="logo" href="{% url 'home' %}"><em>GET POLL</em></a>
+  <ul class="nav-links-wrapper">
+    {% if user.is_authenticated %}
+      <a href="{% url 'user-poll' %}" class="nav-links nav-links-1">Dashboard</a>
+      <a href="{% url 'profile-info' %}" class="nav-links nav-links-2">Profile</a>
+    {% else %}
+      <a href="#" class="nav-links nav-links-1">About</a>
+      <a href="#" class="nav-links nav-links-2">Contact Us</a>
+    {% endif %}
+
+      <a href="{% url 'create' %}" class="nav-links nav-links-3">Create Poll</a>
+  </ul>
+
+  
+  <div class="right">
+    {% if user.is_authenticated %}
+      <a href="{% url 'account_logout' %}" class="sign in">Logout <i class="fas fa-sign-out-alt"></i></a>
+    {% else %}
+      <a href="{% url 'account_login' %}" class="sign in">Login <i class="fas fa-sign-in-alt"></i></a>
+      <a href="{% url 'account_signup' %}" class="sign up">SignUp <i class="fas fa-user"></i></a>
+    {% endif %}
+      
+  </div>
+</header>
