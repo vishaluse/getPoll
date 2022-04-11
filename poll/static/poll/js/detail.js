@@ -62,7 +62,7 @@ $.ajax({
         console.log("I am a gap")
         console.log(response.is_voted)
         if(response.is_voted) {
-            helloBox.innerHTML += `<div class="ui negative message">
+            helloBox.innerHTML += `<br><div class="ui negative message">
                                     <div class="header">
                                     You have already voted
                                     </div>
