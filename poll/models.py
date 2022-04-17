@@ -26,6 +26,8 @@ class Poll(models.Model):
     def get_image(self):
         return self.imageoption_set.all()
 
+
+
 class PollHistory(models.Model) :
     is_voted = models.BooleanField(default=False)
     is_eligible = models.BooleanField(default=False)

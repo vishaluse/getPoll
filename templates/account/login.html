@@ -10,19 +10,17 @@
 
 {% block content %}
 
-<h1>{% trans "Sign In" %}</h1>
+
 
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
 
+<div style="margin-left: 30%"> 
 
 <div class="socialaccount_ballot">
 
-  <ul class="socialaccount_providers">
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
 
 </div>
 
@@ -40,13 +38,14 @@
       {{ form.as_p }}
    
       <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br>
-     
+      <p class="text-mute" style=" color: #aaa;">Not a member? <a href="{% url 'account_signup' %}" >Sign up</a></p>
+    
       <button class="btnn btn-login" type="submit">{% trans "Sign In" %}</button>
     </form>
     </form>
   </div>
 </div>
-
+</div>
 
 {% endblock %}
 

@@ -1,4 +1,4 @@
-{% extends 'poll/base.html' %}
+{% extends 'poll/semantic.html' %}
 {% load static %}
 
 {% block title %} 
@@ -100,33 +100,40 @@ poll detail
         </div>
         
         <br>
-        <div class="right menu">
-            <p>
-                <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Delete Poll
-                </a>
-    
-              </p>
-              <div class="collapse form-group col-md-5" id="collapseExample">
-                <div class="card card-body">
-                  Are you sure you want to delete this poll?
-                 
-    
-                  <div class="form-group col-md-3 ">
-                    <a href="{% url 'deletePoll' poll.id %}"><button type="button" class="btn btn-success mt-4" >Yes</button></a>
-                    <button data-bs-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample" type="button" class="btn btn-danger mt-4" >No</button>
-    
-                  </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Poll</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this poll?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                  
+                  <a href="{% url 'deletePoll' poll.id %}"><button type="button" class="btn btn-success " >Yes</button></a>
                 </div>
               </div>
-        </div>
-        
+            </div>
+          </div>
         
 
+        <div class="right menu">
+            <button type="button" 
+            class="btn btn-danger" 
+            data-bs-toggle="modal" 
+            data-bs-target="#exampleModal">
+                Delete
+              </button>
+        </div>
+        
 
         <br>
     
-        &nbsp;<button class="btn btn-primary" >Submit</button>
+        <button class="btn btn-primary" >Submit</button>
     
     </div>
     </form>

@@ -9,8 +9,8 @@ function addImage() {
             <input type="file" required class="form-control"  name="images" accept="image/*">
         </div>
 
-        <div class="form-group col-md-3 ">
-            <button type="button" onclick="removeOption(${current_option})" class="btn btn-danger mt-4" >Remove</button>
+        <div class="form-group col-md-3 " style="margin-top:35px;">
+            <button type="button"  onclick="removeOption(${current_option})" class="btn btn-danger mt-4" >Remove</button>
         </div>
     </div>
     `
@@ -30,7 +30,7 @@ function addOption() {
             <input type="text" required class="form-control"  name="options" placeholder="enter text">
         </div>
 
-        <div class="form-group col-md-3 ">
+        <div class="form-group col-md-3 " style="margin-top:35px;">
             <button type="button" onclick="removeOption(${current_option})" class="btn btn-danger mt-4" >Remove</button>
         </div>
     </div>
@@ -73,7 +73,7 @@ function firstOne() {
                 <input type="text" required class="form-control"  name="options" placeholder="enter text">
             </div>
 
-            <div class="form-group col-md-3 ">
+            <div class="form-group col-md-3 " style="margin-top:35px;">
                 <button type="button" id="option-box" class="btn btn-success mt-4" >Add options</button>
             </div>
         </div>
@@ -113,7 +113,7 @@ function secondOne() {
                 <input type="file" required class="form-control"  name="images" accept="image/*">
             </div>
 
-            <div class="form-group col-md-3 ">
+            <div class="form-group col-md-3 " style="margin-top:35px;">
                 <button type="button" id="image-box"  class="btn btn-success mt-4" >Add Image</button>
             </div>
         </div>

@@ -5,13 +5,11 @@
 {% for provider in socialaccount_providers %}
 
 
-  
-
     <div class="login-wrapper">
       <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btnn btn-google" 
       href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
       <img src="https://img.icons8.com/fluency/48/000000/google-logo.png" />
-          Log In with Google
+          Continue with Google
       </a>
       <div class="line-breaker">
         <span class="line"></span>

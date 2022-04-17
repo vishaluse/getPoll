@@ -5,9 +5,14 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+<div style="margin-left: 30%;">
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<h3>{% trans "Sign Up" %}</h3>
+
+{% include "socialaccount/snippets/provider_list.html" %}
+
+
+{% include "socialaccount/snippets/login_extra.html" %}
 
 <div class="ui grid">
   <div class="six wide column">
@@ -17,11 +22,12 @@
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
+      <p style="color: #aaa;">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
       <button class="btnn btn-login" type="submit">{% trans "Sign Up" %} &raquo;</button>
     </form>
   </div>
 </div>
-
+</div>
 
 {% endblock %}

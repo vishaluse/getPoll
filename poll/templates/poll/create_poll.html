@@ -1,4 +1,4 @@
-{% extends 'poll/base.html' %}
+{% extends 'poll/semantic.html' %}
 
 {% load static %}
 
@@ -6,6 +6,8 @@
 {% block title %}
 create
 {% endblock title %}
+
+
 
 {% block scripts %}
     <script src="{% static '/poll/js/create.js' %}" defer></script> 
@@ -25,7 +27,8 @@ create
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <div class="container">
+    <div class="create-poll-background" >
+
         <div class="form-group col-md-6 " >
             <label> Question </label>
             <input type="text" required class="form-control"  name="question" placeholder="enter question ">
@@ -69,9 +72,10 @@ create
 
         <br>
 
+        &nbsp;<button class="btn btn-primary" >Submit</button>
     </div>
 
-    &nbsp;<button class="btn btn-primary" >Submit</button>
+    
 </form>
 
 

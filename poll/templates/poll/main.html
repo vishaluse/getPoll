@@ -10,7 +10,9 @@
 home
 {% endblock title %}
 
-
+{% block css %}
+<link rel="stylesheet" href="{% static '/poll/dash.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -23,24 +25,27 @@ home
  
 
 
-<h1>LIVE POLLS</h1>
-{% for obj in object_list %}
+<h1>&nbsp;&nbsp;&nbsp;LIVE POLLS</h1>
 
 
-    <div class="card" style="width: 50rem;">
-      <div class="card-body">
-        <a href="{% url 'poll-detail' obj.id %}">{{obj.question}}</a>
+<div class="items-body">
 
-        {% if obj.user == user %}
-        <a href="{% url 'result' obj.id%}">(result)</a>
-        {% endif %}
-      </div>
-    </div>
-    
-    
-    
-    <br>
-{% endfor %}
+  {% for poll in object_list %}
+
+          <div class="items-body-content" >
+            <span><a href="{% url 'poll-detail' poll.id%}" style="text-decoration: none;">{{poll.question}}</a></span>
+            
+              <div class="align-items-end">
+                  {% if poll.user == user %}
+                  <a class="btn btn-success" href="{% url 'result' poll.id%}">result</a>
+                  {% endif %}
+                </div>
+          </div>
+  {% endfor %}
+  </div>
+
+
+
 
 <section class="middle-content">
   <p class="p1">Know you audience opinions,<br>in the <span>real time.</span><br>

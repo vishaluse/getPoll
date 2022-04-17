@@ -62,16 +62,25 @@ $.ajax({
         console.log("I am a gap")
         console.log(response.is_voted)
         if(response.is_voted) {
-            helloBox.innerHTML += `<br><div class="ui negative message">
-                                    <div class="header">
-                                    You have already voted
-                                    </div>
-                                    <p>try other polls or create a new one.
-                                </p></div>`            
+            for (const [key, value] of Object.entries(data)) {
+                hello.innerHTML += `
+                        <hr>
+                        <div  class="mb-2">
+                            <b>${key}</b>
+                        </div>
+                        <br><div class="ui negative message">
+                        <div class="header">
+                        You have already voted
+                        </div>
+                        <p>try other polls or create a new one.
+                    </p></div>
+                    `
+            }
+          
         } else {
             for (const [key, value] of Object.entries(data)) {
                 optionBox.innerHTML += `
-                        <hr>
+                        
                         <div  class="mb-2">
                             <b>${key}</b>
                         </div>
@@ -115,6 +124,9 @@ const sendData = () => {
             }
         }
     })
+
+    // console.log(data)
+
 
 
     $.ajax({

@@ -15,34 +15,43 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    {% block css %}
+    {% endblock %}
     {% block scripts %}
     {% endblock scripts %}
 </head>
 <body>
 
-
-  
-
       {% include 'poll/navbar.html' %}
 
-      <div class="ui segment">
+      <!-- this is just make sign in and sign up in center -->
+        
+        <div style="margin-left: 20px;">
+
+        
         {% if messages %}
-        <div class="ui message">
-          <ul>
-            {% for message in messages %}
-            <li>{{message}}</li>
-            {% endfor %}
-          </ul>
+
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          {{message}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        {% endfor %}
+  
+        
         {% endif %}
 
           {% block content %}
           {% endblock %}
-      </div>
+      
+        
+        </div>
     
+
+
       <br><br>
-    {% block footer %}
-    <footer>
+
+    <footer style="display: flex;">
         <div class="footer-left">
             <b>Follow Us :</b>
             <ul class="social-links-wrapper">
@@ -53,7 +62,7 @@
         </div>
         <p class="creators">Made with <i class="fas fa-heart"></i> by Vishal | Yogesh | Ajit</p>
     </footer>
-    {% endblock %}
+
 
 </body>
 

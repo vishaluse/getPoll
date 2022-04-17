@@ -34,6 +34,7 @@ def singlePollDetail(request, pk):
         except PollHistory.DoesNotExist:
             poll_history = PollHistory.objects.create(user=request.user, poll=poll)
     else :
+        messages.warning(request, 'You must login to vote')
         visitor = True
         poll_history = False
     
@@ -94,13 +95,13 @@ def save_poll_data(request, pk):
                     i.save()
             poll_history.is_voted = True
             poll_history.save()
-            messages.warning(request, 'You just voted')
+            messages.success(request, 'You just voted')
             return JsonResponse({'data': 'your vote got saved, congrats' })
             
         else :
             return JsonResponse({'data': 'You have already voted'})
     else:
-        return JsonResponse({'data': 'Sign up or login vro'})
+        return JsonResponse({'data': 'Sign up or login'})
         # i need the all the option here which is associated with this question and
         # then I'll do the count ++ manually of the selected option
     
@@ -110,7 +111,6 @@ def save_poll_data(request, pk):
 def result_data(request,pk):
     #using pk we will get the the question then we will see their count;
     poll = Poll.objects.get(pk=pk)
-
     option = poll.get_option()
     image = poll.get_image()
 
@@ -120,8 +120,6 @@ def result_data(request,pk):
     for op in image:
         total += op.count
 
-    
-       
     context = {'polls': poll, 
                'option': option, 
                'image': image, 
@@ -170,6 +168,7 @@ def create_poll(request):
         time = request.POST.get('timer')
 
         print(images)
+        
         # return redirect('/')
         poll = Poll.objects.create(question=question, no_of_option=len(options), time=time, user=request.user)
         
@@ -189,12 +188,12 @@ def create_poll(request):
 @login_required
 def userPoll(request):
     polls = Poll.objects.filter(user=request.user).order_by('-created')
-    # userPolls = []
-    # for poll in polls:
-    #     if poll.user == request.user:
-    #         userPolls.append(poll.order)
-
-    context = {'polls' :polls}
+    total = len(polls)
+    
+    context = {
+        'polls' :polls,
+        'total': total
+    }
     return render(request, 'poll/poll_dashboard.html', context)
 
 # class PollDetailView(DetailView):
