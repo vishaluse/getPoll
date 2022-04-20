@@ -11,7 +11,8 @@ from django.http import JsonResponse
 
 from poll.models import ImageOption, Poll, Option, PollHistory
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages #import messages
+from django.contrib import messages 
+from django.urls import reverse
 import itertools 
 import datetime
 
@@ -170,7 +171,7 @@ def create_poll(request):
         print(images)
         
         # return redirect('/')
-        poll = Poll.objects.create(question=question, no_of_option=len(options), time=time, user=request.user)
+        poll = Poll.objects.create(question=question, time=time, user=request.user)
         
         for option in options:
             Option.objects.create(text=option, poll=poll)
@@ -179,7 +180,8 @@ def create_poll(request):
             ImageOption.objects.create(image=image, poll=poll)
 
         messages.success(request, 'Your poll is created !')
-        return redirect('/')
+        
+        return redirect('poll-detail', pk=poll.pk)
 
     return render(request, 'poll/create_poll.html')
 
@@ -190,15 +192,31 @@ def userPoll(request):
     polls = Poll.objects.filter(user=request.user).order_by('-created')
     total = len(polls)
     
+    received = 0
+    given = 0
+
+    for poll in polls:
+        options = poll.get_option()
+        for option in options:
+            received += option.count
+
+
+    poll_history = PollHistory.objects.filter(user=request.user)
+    for history in poll_history:
+        if history.is_voted:
+            given += 1
+       
+
+    print(poll_history)
+    
     context = {
         'polls' :polls,
-        'total': total
+        'total': total,
+        'received': received,
+        'given': given
     }
     return render(request, 'poll/poll_dashboard.html', context)
 
-# class PollDetailView(DetailView):
-#     model = Poll
-#     template_name = 'poll/poll_update.html'
 
 def updateOption(option_list, option_given_list, poll, givenModel) :
     for (a, b) in itertools.zip_longest(option_list, option_given_list):
@@ -217,7 +235,8 @@ def updateOption(option_list, option_given_list, poll, givenModel) :
                     Option.objects.create(text=b, poll=poll)
 
 
-
+# it will update the poll
+@login_required
 def userPollDetail(request, pk):
     poll = Poll.objects.get(pk=pk)
     option_list = poll.get_option()
@@ -225,6 +244,7 @@ def userPollDetail(request, pk):
     
     # if user has submitted the form then this will get called
     if request.method == "POST":
+        result = request.POST.get('decision')
         # it will check if the fields are changed, if they are, it will update the current poll
         question = request.POST.get('question')
         time = request.POST.get('timer')
@@ -233,7 +253,6 @@ def userPollDetail(request, pk):
         poll.time = time
 
         poll.created = datetime.datetime.now()
-        poll.save()
 
         image_img_list  = request.FILES.getlist('images')
         option_text_list  = request.POST.getlist('options')
@@ -244,6 +263,14 @@ def userPollDetail(request, pk):
         
         if image_list :
             updateOption(image_list, image_img_list, poll, ImageOption)
+
+        # desicion for users to see the result
+        if str(result) == "Yes": 
+            poll.is_eligible = True
+        else:
+            poll.is_eligible = False
+        poll.save()
+        
         
         messages.warning(request, "your poll is updated")
 

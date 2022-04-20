@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 class Poll(models.Model):
     question = models.CharField(max_length=200)
-    no_of_option = models.IntegerField()
+    is_eligible = models.BooleanField(default=False)
     time = models.IntegerField(help_text="duration of the poll in minutes")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
@@ -30,7 +30,6 @@ class Poll(models.Model):
 
 class PollHistory(models.Model) :
     is_voted = models.BooleanField(default=False)
-    is_eligible = models.BooleanField(default=False)
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 

@@ -2,7 +2,6 @@ from poll.models import Option, Poll, ImageOption, PollHistory
 from django.contrib import admin
 
 
-# Register your models here.
 class OptionInline(admin.TabularInline):
     model = Option
 

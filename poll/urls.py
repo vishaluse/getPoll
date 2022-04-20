@@ -13,7 +13,6 @@ urlpatterns = [
     path('profile-dash/', views.profile_dashboard, name='profile-dash'),
     path('profile-info/', views.profile_info, name='profile-info'),
     path('user-poll/', views.userPoll, name='user-poll'),
-    # path('poll-detail/<int:pk>/', views.PollDetailView.as_view(), name='userPollDetail')
     path('userPollDetail/<int:pk>', views.userPollDetail, name='userPollDetail'),
     path('delelePoll/<int:pk>', views.deletePoll, name='deletePoll'),
 

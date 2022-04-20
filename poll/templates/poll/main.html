@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block scripts %}
-    <script src="{% static '/poll/js/main.js' %}" defer></script> 
 
 {% endblock scripts %}
 
@@ -10,9 +9,7 @@
 home
 {% endblock title %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static '/poll/dash.css' %}">
-{% endblock %}
+
 
 {% block content %}
 
@@ -24,28 +21,27 @@ home
 </section>
  
 
-
-<h1>&nbsp;&nbsp;&nbsp;LIVE POLLS</h1>
-
-
-<div class="items-body">
-
-  {% for poll in object_list %}
-
-          <div class="items-body-content" >
-            <span><a href="{% url 'poll-detail' poll.id%}" style="text-decoration: none;">{{poll.question}}</a></span>
-            
-              <div class="align-items-end">
-                  {% if poll.user == user %}
-                  <a class="btn btn-success" href="{% url 'result' poll.id%}">result</a>
-                  {% endif %}
-                </div>
-          </div>
-  {% endfor %}
-  </div>
+<h1 style="text-align: center; margin-bottom: 20px;">LIVE POLLS</h1>
+{% for poll in object_list %}
 
 
+    <div class="card" style="z-index: 0;">
+      <div class="card-body">
+        <a class="question" href="{% url 'poll-detail' poll.id %}">{{poll.question}}</a>
 
+        
+        <div class="result-vote">
+          {% if poll.is_eligible or poll.user == user %}
+          <a class="result" href="{% url 'result' poll.id%}">result</a>
+          {% endif %}
+          <a class="vote" href="{% url 'poll-detail' poll.id%}">vote</a>
+        </div>
+      </div>
+    </div>
+
+    
+    <br>
+{% endfor %}
 
 <section class="middle-content">
   <p class="p1">Know you audience opinions,<br>in the <span>real time.</span><br>
@@ -58,3 +54,4 @@ home
 
 
 {% endblock content %}
+

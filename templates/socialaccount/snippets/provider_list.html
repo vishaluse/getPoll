@@ -1,3 +1,4 @@
+
 {% load socialaccount %}
 
 {% get_providers as socialaccount_providers %}
@@ -5,17 +6,14 @@
 {% for provider in socialaccount_providers %}
 
 
-    <div class="login-wrapper">
+  
+    <div class="lgn-google-wrapper">
+      <i class="fab fa-google"></i>
       <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btnn btn-google" 
-      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
-      <img src="https://img.icons8.com/fluency/48/000000/google-logo.png" />
-          Continue with Google
+      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"
+      > Log In with Google
       </a>
-      <div class="line-breaker">
-        <span class="line"></span>
-        <span>or</span>
-        <span class="line"></span>
-      </div>
     </div>
+    
 
 {% endfor %}
