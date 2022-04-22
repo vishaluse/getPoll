@@ -19,6 +19,20 @@
     {% if user.is_authenticated %}
       <!-- <a href="#"></a> -->
       <a href="{% url 'account_logout' %}" class="sign in logout">Logout <i class="fas fa-sign-out-alt"></i></a>
+      <div class="nav-menu">
+        <i class="fa fa-solid fa-user profile-settings"></i>
+        <div class="profile-dashboard-menu">
+            <a class="item" href="{% url 'profile-info' %}">
+              Profile
+            </a>
+            <a class="item" href="{% url 'account_set_password' %}">
+              Set Password
+            </a>
+            <a class="item" href="{% url 'account_email' %}">
+              Add Email 
+            </a>
+        </div>
+      </div>
     {% else %}
       <a href="{% url 'account_login' %}" class="sign in">Login <i class="fas fa-sign-in-alt"></i></a>
       <a href="{% url 'account_signup' %}" class="sign up">SignUp <i class="fas fa-user"></i></a>

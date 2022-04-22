@@ -59,24 +59,10 @@ $.ajax({
     success: function(response){
         console.log(response)
         const data = response.data
-        console.log("I am a gap")
-        console.log(response.is_voted)
+        // console.log("I am a gap")
+        // console.log(response.is_voted)
         if(response.is_voted) {
-            for (const [key, value] of Object.entries(data)) {
-                hello.innerHTML += `
-                        <hr>
-                        <div  class="mb-2">
-                            <b>${key}</b>
-                        </div>
-                        <br><div class="ui negative message">
-                        <div class="header">
-                        You have already voted
-                        </div>
-                        <p>try other polls or create a new one.
-                    </p></div>
-                    `
-            }
-          
+            helloBox.innerHTML += `<h1 class="ui segment header">You have already Voted!</h1>`            
         } else {
             for (const [key, value] of Object.entries(data)) {
                 optionBox.innerHTML += `
@@ -124,9 +110,6 @@ const sendData = () => {
             }
         }
     })
-
-    // console.log(data)
-
 
 
     $.ajax({

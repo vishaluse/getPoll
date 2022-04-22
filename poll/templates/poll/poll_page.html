@@ -9,13 +9,15 @@ poll page
 
 {% block scripts %}
 <script src="{% static 'poll/js/detail.js' %}" defer></script> 
-
 {% endblock scripts %}
 {% load social_share %}
+
+{% block css %}
+<!-- <link rel="stylesheet" href="{% static '/poll/login.css' %}"> -->
+{% endblock %}
 {% block content %}
 
-
-<div class="row container-fluid">
+<div class="row ">
    
 
     <div class="ui labeled button" tabindex="0">
@@ -25,24 +27,26 @@ poll page
         <a class="ui basic label">
             {{poll.user}}
         </a>
-      
-    <div class="col text-right" id="timer-box">countdown </div>
 </div>
 
+{% if visitor or poll_history.is_voted is False%}
+<div class="col text-right" style="margin-left: 60%;" id="timer-box">countdown </div>
+{% endif %}
 <div id="hello"></div>
+
 
 <h4 class="ui horizontal divider header">
     <i class="chart bar outline icon"></i>
     Poll
   </h4>
 
-<form id="option-form" class="mt-3 mb-3">
+<form id="option-form" class=" mt-3 mb-3">
     {% csrf_token %}
-    
-    <div id="option-box"></div>
-
     {% if visitor or poll_history.is_voted is False%}
-    <div class="form-group">
+    <div class="container-fluid" id="option-box"></div>
+
+    
+    <div class="form-group container-fluid ">
         <div class="radio">
             {% for img in image %}
             <div class="ui form">
@@ -51,31 +55,51 @@ poll page
             </div>
             {% endfor %}
         </div> 
+
+        <button type="submit" class="btn btn-primary mt-3"> save</button>
     </div>
 
     
-    &nbsp;<button type="submit" class="btn btn-primary mt-3"> save</button>
-    <br>
+    
+    {% else %}
+    <div class="content container-fluid ">
+        <h3 class="ui header">{{poll.question}}</h3>
+        <div style="display: flex;">
+            {% for img in image %}
+            <div><img style="height: 200px; width: 200px" src="{{img.image.url}}" alt=""></div>
+            {% endfor %}
+        </div>
+        {% for op in option %}
+        <div class="description">{{op.text}}</div>
+        {% endfor %}
+        {% if poll.is_eligible or poll.user == request.user %}
+        <a href="{% url 'result' poll.id %}" class="btn btn-success mt-3"> Result</a>
+        {% endif %}
+       
+
+      </div>
     {% endif %}
-    
-   
-    <br>
-    <p>share:</p>
-        
-    <div class="ui grid ">
-        {% post_to_whatsapp object_or_url " " %}
-    
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://getpoll.herokuapp.com{{request.path}}">
-            <i class="facebook icon"></i>
-        </a>
-        <br>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://getpolls.herokuapp.com/38&title=Be%20first%20%7C%20Join%20Swift%20for%20Entrepreneurs&summary=Swift%20for%20Entrepreneurs%20is%20a%20project-based%20programming%20course%20for%20non-technical%20founders.%20We'll%20learn%20how%20to%20build%20iOS%20apps%20from%20scratch%20using%20Apple's%20new%20programming%20language:%20Swift.%20Be%20first%20and%20learn%20with%20me!&source=http://getpolls.herokuapp.com/{{request.path}}">
-            <i class="linkedin icon"></i>
-        </a>
-        
-        {% post_to_twitter "New Poll: {{poll.question}}. Check it out!" object_or_url " " %}
-    </div>
 
+
+
+    <div class="container-fluid">
+        <p > Share:</p>
+        <div class="ui grid ">
+            {% post_to_whatsapp object_or_url " " %}
+        
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://getpoll.herokuapp.com{{request.path}}">
+                <i class="facebook icon"></i>
+            </a>
+            <br>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://getpolls.herokuapp.com/38&title=Be%20first%20%7C%20Join%20Swift%20for%20Entrepreneurs&summary=Swift%20for%20Entrepreneurs%20is%20a%20project-based%20programming%20course%20for%20non-technical%20founders.%20We'll%20learn%20how%20to%20build%20iOS%20apps%20from%20scratch%20using%20Apple's%20new%20programming%20language:%20Swift.%20Be%20first%20and%20learn%20with%20me!&source=http://getpolls.herokuapp.com/{{request.path}}">
+                <i class="linkedin icon"></i>
+            </a>
+            
+            {% post_to_twitter "New Poll: {{poll.question}}. Check it out!" object_or_url " " %}
+        </div>
+    </div>
+    
+    <br>
 </form>
 <div id="score-box"></div>
 <div id="result-box"></div>

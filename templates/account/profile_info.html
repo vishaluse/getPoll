@@ -1,24 +1,23 @@
-{% extends "poll/semantic.html" %}
+{% extends "poll/base.html" %}
+{% load static %} 
 
+{% block css %}
+<link rel="stylesheet" href="{% static '/poll/login.css' %}">
+{% endblock %}
 
 {% block content %}
 
-    <div>
-        {% include 'poll/profile_dashboard.html' %}
-    </div>
-
-    
-
-    <h1 class="header"> User Information </h1>
-    <div class="ui grid">
-        <div class="ten-wide-column">
-            <form class="ui form">
-                <p >username: &nbsp;{{user.username}}</p>
-                <p >email:&nbsp;{{user.email}}</p>
-            </form>
+<div class="lgn-container">
+    <div class="lgn-wrapper">
+        <h2 class="sign-in-h2"> User Information </h2>
+        <div class="ui grid">
+            <div class="ten-wide-column">
+                 <form class="ui form profile-info-form">
+                    <p> <span> Username: </span>{{user.username}}</p>
+                    <p><span> Email Id: </span>{{user.email}}</p>
+                </form>
+            </div>
         </div>
-        
-
     </div>
 </div>
 

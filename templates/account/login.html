@@ -10,6 +10,17 @@
 <link rel="stylesheet" href="{% static '/poll/login.css' %}">
 {% endblock %}
 
+{% block msgs %}
+    {% if messages %}
+    <div class="ui message">
+        <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="lgn-container">
@@ -53,6 +64,5 @@
 </div>
 
 {% endblock %}
-
 
 

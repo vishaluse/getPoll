@@ -129,4 +129,3 @@ function secondOne() {
     imageBox.addEventListener ("click", addImage, false);
 }
 
-

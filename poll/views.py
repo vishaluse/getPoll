@@ -15,12 +15,13 @@ from django.contrib import messages
 from django.urls import reverse
 import itertools 
 import datetime
+import random
 
 
 
 # it will pass all the poll object in the model , cause its a listView
 class PollListView(ListView):
-    model = Poll
+    model = Poll #object_list
     template_name = 'poll/main.html'
     ordering = ['-created']
 
@@ -28,6 +29,7 @@ class PollListView(ListView):
 def singlePollDetail(request, pk):
     poll = Poll.objects.get(pk=pk)
     image = poll.get_image()
+    option = poll.get_option()
     visitor = False
     if request.user.is_authenticated: 
         try:
@@ -39,7 +41,7 @@ def singlePollDetail(request, pk):
         visitor = True
         poll_history = False
     
-    context = {'poll': poll, 'image': image, 'poll_history': poll_history, 'visitor': visitor}
+    context = {'poll': poll, 'image': image, 'poll_history': poll_history, 'visitor': visitor, 'option': option}
     return render(request, 'poll/poll_page.html', context)
 
 
@@ -121,10 +123,16 @@ def result_data(request,pk):
     for op in image:
         total += op.count
 
+    colors = ["blue", "green"]
+
+
+    color = random.choice(tuple(colors))
+
     context = {'polls': poll, 
                'option': option, 
                'image': image, 
-               'total': total}
+               'total': total,
+               'color': color}
     
     return render(request, 'poll/result.html', context)
 
@@ -168,7 +176,6 @@ def create_poll(request):
         images  = request.FILES.getlist('images')
         time = request.POST.get('timer')
 
-        print(images)
         
         # return redirect('/')
         poll = Poll.objects.create(question=question, time=time, user=request.user)
@@ -207,7 +214,7 @@ def userPoll(request):
             given += 1
        
 
-    print(poll_history)
+    
     
     context = {
         'polls' :polls,
@@ -217,6 +224,7 @@ def userPoll(request):
     }
     return render(request, 'poll/poll_dashboard.html', context)
 
+ 
 
 def updateOption(option_list, option_given_list, poll, givenModel) :
     for (a, b) in itertools.zip_longest(option_list, option_given_list):

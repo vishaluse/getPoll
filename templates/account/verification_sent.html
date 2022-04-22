@@ -1,17 +1,26 @@
-{% extends "poll/semantic.html" %}
+{% extends "poll/base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static '/poll/login.css' %}">
+{% endblock %}
 
 {% block content %}
-   
+<div class="lgn-container">
+    <div class="lgn-wrapper">
             <div class="ui form">
-                <h1>{% trans "Verify Your E-mail Address" %}</h1>
+                <h2 class="sign-in-h2">{% trans "Verify Your E-mail Address" %}</h2>
 
-                <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder. Please contact us if you do not receive the verification e-mail within a few minutes.{% endblocktrans %}</p>
-            </div>     
+                <p class="para">{% blocktrans %}We have sent an e-mail to you for <strong>verification</strong>. Follow the link provided to finalize the signup process.{% endblocktrans %}</p>
+
+                <p class="para">{% blocktrans %}If you do not see the verification e-mail in your main inbox, check your spam folder. Please contact us if you do not receive the verification e-mail within a few minutes.{% endblocktrans %}</p>
+                <!-- TODO: Resend link Wala option -->
+            </div>    
+    </div> 
+</div>
  
-    
 {% endblock %}
 
 

@@ -2,22 +2,21 @@
 {% load static %}
 
 {% block scripts %}
+    <script src="{% static '/poll/js/main.js' %}" defer></script> 
 
 {% endblock scripts %}
 
 {% block title %}
-home
+GetPoll
 {% endblock title %}
 
 
 
 {% block content %}
 
-
-
     
 <section class="upper-content">
-    <p class="tagline"><a href="{% url 'create' %}">Create</a> Instant Polls <br> At Your Finger Clicks!</p>
+    <p class="tagline"><a href="{% url 'create' %}">Create</a> Instant Polls <br> At Your Few Finger Clicks!</p>
 </section>
  
 
@@ -38,7 +37,8 @@ home
         </div>
       </div>
     </div>
-
+    
+    
     
     <br>
 {% endfor %}

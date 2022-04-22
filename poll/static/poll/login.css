@@ -33,7 +33,7 @@ p label{
   margin-bottom: 20px;
 }
 .lgn-wrapper input{
-  width: 330px;
+  width: 300px;
   height: 75px;
   font-size: 17px;
   padding: 0px 20px;
@@ -102,7 +102,7 @@ label[for='id_remember']{
   align-items: center;
   font-size: 18px;
   height: 50px;
-  width: 50%;
+  width: 56%;
   margin: 10px auto;
   padding: 0 10px;
   border-radius: 3px;
@@ -125,11 +125,8 @@ label[for='id_remember']{
 }
 .message{
   background-color: #F8F9FA;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 50px;
 }
+
 ul li{
   width: fit-content;
   list-style: none;
@@ -139,28 +136,133 @@ ul li{
   padding: 20px;
   box-shadow: 0 0 10px #e34133;
   color: whitesmoke;
+  margin: 0px auto;
+
 }
-.errorlist li{
-  width: 350px;
-  padding:10px;
+.errorlist{
+  /* border: 1px solid black; */
+  width: 100%;
   text-align: center;
   margin: 20px 0;
+  animation: remove_errorlist 1s 1s 1 linear forwards;
 }
+.errorlist li{
+  animation: remove_errorlist 1s 1s 1 linear forwards;
+}
+@keyframes remove_errorlist {
+  0%{
+  }
+  20%{
+      height: 40px;
+      opacity: 0.8;
+  }
+  40%{
+      height: 30px;
+      opacity: 0.6;
+  }
+  60%{
+      height: 20px;
+      opacity: 0.4;
+  }
+  80%{
+      height: 10px;
+      opacity: 0.2;
+  }
+  100%{
+      height: 0px;
+      display: none;
+      opacity: 0;
+  }
+}
+
+
 .lgt-btn{
   margin-top: 10px;
 }
+.profile-info-form p{
+  color: #3BBD6C;
+  margin-bottom: 10px;
+  /* border: 1px solid black; */
+}
+.profile-info-form span{
+  color: #495057;
+  /* border: 1px solid black; */
+  display: inline-block;
+  width: 90px;
+}
 .para{
   /* border: 1px solid black; */
-  padding: 20px 20px;
+  margin: 0 auto;
+  padding: 0 20px 20px;
   width: 330px;
   font-size: 15px;
   text-align: center;
   color: #3BBD6C;
 }
-.pswd-mail-snt{
-  background-color: #3BBD6C;
-  box-shadow: 0 0 10px #3BBD6C;
-  border-radius: 3px;
-  border: 2px solid #3BBD6C;
+
+.buttonHolder{
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+.buttonHolder button{
+  width: 150px;
+  height: 50px;
+  font-size: 14px;
+  margin: 0;
 }
 
+.ctrlHolder{
+  border: 2px solid #DEE2E6;
+  margin: 0 auto;
+  margin: 20px 0px;
+  padding: 10px 0px;
+  border-radius: 3px;
+  
+}
+
+
+.ctrlHolder input{
+  margin: 0;
+  width: 14px;
+  height: 14px;
+}
+.ctrlHolder label{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* border: 1px solid black; */
+  font-size: 14px;
+}
+fieldset{
+  border: none;
+  outline: none;
+  margin-bottom: 50px;
+}
+.ctrlHolder span{
+  margin: 0px 20px;
+  accent-color: #1c7ed6;
+}
+
+.add_email input{
+  width: calc(100% - 41px);
+}
+.add_email button{
+  width: 100%;
+  margin: 10px 0px 0px;
+}
+.status{
+  font-family: 'Montserrat';
+  font-weight: bold;
+}
+.verified{
+  color: #3BBD6C;
+}
+.unverified{
+  color: #e34133;
+}
+.primary{
+  color: #1c7ed6;
+}

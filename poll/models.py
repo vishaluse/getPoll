@@ -38,8 +38,6 @@ class PollHistory(models.Model) :
     
 
 
-
-
 class Option(models.Model):
     text = models.CharField(max_length=100)
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)

@@ -8,12 +8,19 @@
 {% endblock %}
 {% block content %}
 
+
+
 <div class="lgn-container">
   <div class="lgn-wrapper">
     <h2 class="sign-in-h2">{% trans "Sign Up" %}</h2>
     <div class="ui grid">
       <div class="six wide column">
         <form class="signup ui form" id="signup_form" method="post" action="{% url 'account_signup' %}">
+          <div class="socialaccount_ballot">
+            <ul class="socialaccount_providers">
+              {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </ul>
+          </div>
           {% csrf_token %}
           {{ form.as_p }}
           {% if redirect_field_value %}
@@ -26,7 +33,7 @@
         </form>
       </div>
     </div>
-    <a href="{% url 'account_login' %}" class="goto-signup">Already have an account? Then please sign in</a>
+    <a href="{% url 'account_login' %}" class="goto-signup">Already have an account? Sign in</a>
   </div>
 </div>
 

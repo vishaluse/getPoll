@@ -7,11 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}GetPoll{% endblock %}</title>
-    <link rel="stylesheet" href="{% static '/poll/base.css' %}">
-    <link rel="stylesheet" href="{% static '/poll/login.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static '/poll/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Varela+Round&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="{% static '/poll/base.css' %}">
+
+   
     {% block css %}
     {% endblock %}
     {% block scripts %}
@@ -21,9 +25,10 @@
 
 
   
-
-      {% include 'poll/navbar.html' %}
-      <div class="ui segment">
+      {% block header %}
+        {% include 'poll/navbar.html' %}
+      {% endblock %}
+      {% block msgs %}
         {% if messages %}
         <div class="ui message">
           <ul>
@@ -33,7 +38,7 @@
           </ul>
         </div>
         {% endif %}
-      </div>
+      {% endblock %}
       {% block content %}
       {% endblock %}
     {% block footer %}
@@ -52,6 +57,18 @@
     </footer>
     {% endblock %}
 
+
+<script>
+  const nav_menu = document.querySelector('.nav-menu')
+  const profile_menu = document.querySelector('.profile-dashboard-menu')
+  nav_menu.addEventListener('mouseenter', ()=>{
+    profile_menu.style.display = 'block';
+  })
+  nav_menu.addEventListener('mouseleave', ()=>{
+    profile_menu.style.display = 'none';
+  })
+</script>
+{% block internal_js %}
+{% endblock %}
 </body>
 </html>
-

@@ -1,4 +1,4 @@
-{% extends 'poll/semantic.html' %}
+{% extends 'poll/base.html' %}
 {% load static %}
 
 {% block title %} 
@@ -9,15 +9,18 @@ poll detail
     <script src="{% static '/poll/js/update.js' %}" defer></script> 
 {% endblock scripts %}
 
+{% block css %}
+ <link rel="stylesheet" href="{% static '/poll/login.css' %}">
+ <link rel="stylesheet" href="{% static '/poll/update.css' %}">
+ {% endblock %}
+
 
 
 {% block content %}
+<div class="lgn-container">
+  <div class="lgn-wrapper">
 
-<div class="container">
-    <div class="text-center">
-        <h2>Update Poll</h2>
-    </div>
-</div>
+        <h2 class="sign-in-h2">Update Poll</h2>
 
 
 <form method="POST" enctype="multipart/form-data">
@@ -25,7 +28,7 @@ poll detail
 
     <div class="container">
         <div class="form-group col-md-6 " >
-            <label> Question </label>
+            <label id="question"> Question </label>
             <input type="text" required class="form-control"  name="question" value="{{poll.question}}">
         </div>
     
@@ -40,7 +43,7 @@ poll detail
             {% else %}
             <div class="form-group col-md-5">
                 <label >Image</label>
-                <input type="file" required class="form-control"  name="images" accept="image/*">
+                <input type="file" style="height: 26px; padding:0px" required class="form-control"  name="images" accept="image/*">
             </div>
             {% endif %}
         </div>
@@ -55,16 +58,20 @@ poll detail
                 </div>
         
                 <div class="form-group col-md-3 ">
-                    <button type="button" onclick="addOption()" class="btn btn-success mt-4" >Add options</button>
+                    <button type="button" style="width:188px;height:50px;" onclick="addOption()" class="lgn-btn" >Add options
+                    <i class="fa fa-plus"></i>
+                </button>
                 </div>
             {% else %}
                 <div class="form-group col-md-5">
                     <label >Image</label>
-                    <input type="file" required class="form-control" name="images" accept="image/*">
+                    <input type="file" style="height: 26px; padding:0px" required class="form-control" name="images" accept="image/*">
                 </div>
         
                 <div class="form-group col-md-3 ">
-                    <button type="button" id="image-body" class="btn btn-success mt-4" >Add Image</button>
+                    <button type="button" style="width:188px;height:50px;" id="image-body" class="lgn-btn" >Add Image
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
             {% endif %}
 
@@ -78,12 +85,14 @@ poll detail
                 {% else %}
                     <div class="form-group col-md-5">
                         <label >Image </label>
-                        <input type="file" required class="form-control"  name="images" accept="image/*">
+                        <input type="file" style="height: 26px; padding:0px" required class="form-control"  name="images" accept="image/*">
                     </div>
                 {% endif %}
         
                 <div class="form-group col-md-3 ">
-                    <button type="button" onclick="removeOption({{option.id}})" class="btn btn-danger mt-4" >Remove</button>
+                    <button type="button" style="width:188px;height:50px;" onclick="removeOption({{option.id}})" class="btn-danger lgn-btn">Remove
+                    <i class="fa fa-trash"></i>
+                     </button>
                 </div>
             </div>
             {% endfor %}
@@ -91,6 +100,21 @@ poll detail
         </div>
     
         <div class="row" id="add-option"></div>
+
+        <br>
+
+        <div class="form-group col-md-3">
+            <label for="exampleFormControlSelect1">Do you want your audience to see the result?</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="decision">
+                {% if poll.is_eligible %}
+                <option>Yes</option>
+                <option>No</option>
+                {% else %}
+                <option>No</option>
+                <option>Yes</option>
+                {% endif %}
+            </select>
+            </div>
     
         <br>
         
@@ -100,57 +124,16 @@ poll detail
         </div>
         
         <br>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Delete Poll</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this poll?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                  
-                  <a href="{% url 'deletePoll' poll.id %}"><button type="button" class="btn btn-success " >Yes</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
         
-        <div class="form-group col-md-3">
-        <label for="exampleFormControlSelect1">Do you want your audience to see the result?</label>
-        <select class="form-control" id="exampleFormControlSelect1" name="decision">
-            {% if poll.is_eligible %}
-            <option>Yes</option>
-            <option>No</option>
-            {% else %}
-            <option>No</option>
-            <option>Yes</option>
-            {% endif %}
-        </select>
-        </div>
-        <br>
-
-        <div class="right menu">
-            <button type="button" 
-            class="btn btn-danger" 
-            data-bs-toggle="modal" 
-            data-bs-target="#exampleModal">
-                Delete
-              </button>
-        </div>
         
-
-        <br>
-    
-        <button class="btn btn-primary" >Submit</button>
+        <button class="btn-success lgn-btn" >Submit
+            <i class="fa-solid fa-circle-chevron-right"></i>
+        </button>
     
     </div>
     </form>
 
-
+</div>
+</div>
 
 {% endblock %}

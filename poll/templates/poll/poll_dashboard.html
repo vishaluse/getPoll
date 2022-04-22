@@ -1,4 +1,4 @@
-{% extends 'poll/semantic.html' %}
+{% extends 'poll/base.html' %}
 
 {% load static %}
 
@@ -6,12 +6,14 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
 {% endblock scripts %}
 
+
 {% block title %}
-{{user.username}} poll list
+Polls of @{{user.username}}
 {% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static '/poll/dash.css' %}">
+<link rel="stylesheet" href="{% static '/poll/login.css' %}">
+<link rel="stylesheet" href="{% static '/poll/dashboard.css' %}">
 {% endblock %}
 
 
@@ -19,95 +21,51 @@
 
 {% block content %}
 
-<!-- show all the polls here , implement update and delete feature then will see how it goes -->
-
-
-
-
-
-
-<div class="container">
-
-  <div class="ui teal inverted segment">
-    <i class="star icon"></i>
-    All the polls you created are listed here
-    <div class="fas">Total : {{total}}</div>
-  </div>
-  <div class="all-content" style="border: 0px solid black; display:flex; justify-content:space-between;
-    align-items: center;">
-    <div class="items-body" style="border: 0px solid black; align-self: flex-start; width: 50%;">
+<div class="dashboard-wrapper">
+  <h2 class="sign-in-h2">All of your created poll are listed here</h2>
+  <div class="dashboard-main-content">
+    <div class="dashboard-poll-list">
 
 
       {% for poll in polls %}
-  
-  
-      <div class="modal fade" id="exampleModal{{poll.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete poll</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to delete this poll?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-  
-              <a href="{% url 'deletePoll' poll.id %}"><button type="button" class="btn btn-success ">Yes</button></a>
-            </div>
-          </div>
+      <div class="dashboard-each-poll">
+        <a href="{% url 'poll-detail' poll.id%}">{{poll.question}}</a>
+        <div class="dashboard-edit-remove-icons">
+            <a href="{% url 'userPollDetail' poll.id%}"><i class="fas fa-edit"></i></a>
+            <a href="{% url 'deletePoll' poll.id %}"><i class="fas fa-trash"></i></a>
         </div>
-      </div>
-  
-  
-      <div class="items-body-content">
-        <span><a href="{% url 'poll-detail' poll.id%}" style="text-decoration: none;">{{poll.question}}</a></span>
-  
-  
-  
-        
-          <a href="{% url 'userPollDetail' poll.id%}"><i class="fas fa-edit"></i></a>
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal{{poll.id}}">
-            <i class="fas fa-trash"></i>
-          </a>
-        
       </div>
       {% endfor %}
     </div>
-
-    <div style="width:500px; height: 100%;">
+    <div class="hori"></div>
+    <div class="dashboard-chart" style="width:400px; height: 100%;">
       <canvas id="myChart" ></canvas>
     </div>
-
   </div>
-  
 </div>
 
+{% endblock %}
 
+{% block internal_js %}
 <script>
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Total polls created', 'Total votes received', 'Total votes given'],
-      datasets: [{
-        label: 'Your Poll Related Data',
-        data: [{{ total }}, {{ received }}, {{ given }}],
-  backgroundColor: [
-    'rgb(255, 99, 132)',
-    'rgb(54, 162, 235)',
-    'rgb(255, 205, 86)'
-  ],
-    hoverOffset: 4
-  }]
-    },
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Total polls created', 'Total votes received', 'Total votes given'],
+        datasets: [{
+          label: 'Your Poll Related Data',
+          data: [{{ total }}, {{ received }}, {{ given }}],
+          backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)'
+          ],
+          hoverOffset: 4,
+    }]
+      },
+    
+  });
+  </script>
   
-});
-</script>
-
-
-
-
 {% endblock %}
