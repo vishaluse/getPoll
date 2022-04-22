@@ -3,3 +3,4 @@ images
 __pycache__
 staticfiles
 sec.py
+db.sqlite3
